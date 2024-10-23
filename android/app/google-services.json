@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "858718782821",
+    "project_id": "ai-saas-application-13eaa",
+    "storage_bucket": "ai-saas-application-13eaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858718782821:android:6691f6c3e8299c4e290d8c",
+        "android_client_info": {
+          "package_name": "com.example.ai_saas_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpTgjRTz3mVH68YcxQ-4lTgsFHYwpUz64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
