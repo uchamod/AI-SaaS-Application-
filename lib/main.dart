@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "AI text extractor SaaS application",
       debugShowCheckedModeBanner: false,
+      //stying data
       theme: ThemeData(
         scaffoldBackgroundColor: secondaryColor,
         fontFamily: GoogleFonts.notoSans().fontFamily,
@@ -31,9 +32,23 @@ class MyApp extends StatelessWidget {
           elevation: 1,
           selectedItemColor: secondaryColor,
           unselectedItemColor: terneryColor,
-          
         ),
         cardColor: primaryColor,
+        //evaluated button theme
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: horizontalPadding,
+            ),
+            alignment: Alignment.center,
+            fixedSize: const Size.fromWidth(230),
+            shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(16)),
+            backgroundColor: primaryColor,
+          ),
+        ),
       ),
       home: MainScreen(),
     );
