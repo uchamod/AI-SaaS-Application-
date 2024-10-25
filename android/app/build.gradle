@@ -41,6 +41,13 @@ android {
         }
     }
 }
+apply plugin: 'com.android.application'
+
+
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
+}
 
 flutter {
     source = "../.."
@@ -51,4 +58,24 @@ dependencies {
     implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0'
     implementation 'com.google.mlkit:text-recognition-japanese:16.0.0'
     implementation 'com.google.mlkit:text-recognition-korean:16.0.0'
+   // implementation 'com.google.android.gms:play-services-base:18.1.0'
+
+    // implementation 'com.google.android.gms:play-services-basement:latest_version'
+    // implementation 'com.google.firebase:firebase-core:latest_version'
+
 }
+// android {
+//     defaultConfig {
+//         // ... other configs ...
+//         multiDexEnabled true
+//     }
+// }
+
+// dependencies {
+//     implementation 'com.google.android.gms:play-services-base:latest.version'
+//     implementation 'com.google.android.gms:play-services-basement:latest.version'
+//     // Add multidex support
+//     implementation 'androidx.multidex:multidex:2.0.1'
+// }
+// implementation 'com.google.android.gms:play-services-basement:latest_version'
+// implementation 'com.google.firebase:firebase-core:latest_version'

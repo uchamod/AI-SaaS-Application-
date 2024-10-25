@@ -19,7 +19,7 @@ class _HistorypageState extends State<Historypage> {
           style: Typhography().title,
         ),
       ),
-      body: const UserHistory(),
+      body: UserHistory(),
     );
   }
 }

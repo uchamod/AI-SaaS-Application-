@@ -34,22 +34,27 @@ class FirestoreServices {
   //get history data
   Stream<List<DataMoedel>> getConvasationData() {
     try {
-      if (_auth.currentUser == null) {
+      final userId = _auth.currentUser?.uid;
+      if (userId == null) {
+        print("no user found");
         throw ("no user Found");
       }
-      String userId = _auth.currentUser!.uid;
+
       //filter data according to user id
-      return _firebaseFirestore
+     Stream<List<DataMoedel>> dataStream = _firebaseFirestore
           .collection("datamodel")
-          .where("userId", isEqualTo: userId)
+          .where('userId', isEqualTo: userId)
           .snapshots()
           .map((snapshot) {
         return snapshot.docs.map((doc) {
           return DataMoedel.fromMap(doc.data());
         }).toList();
       });
+      print("data print ${dataStream}");
+
+      return dataStream;
     } catch (err) {
-      print(err.toString());
+      print("data getting error :$err");
       return Stream.value([]);
     }
   }

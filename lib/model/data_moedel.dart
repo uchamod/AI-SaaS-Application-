@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DataMoedel {
   final String userId;
   final String convasationData;
-  final String imageUrl;
+  
   final DateTime convasationDate;
-
+final String imageUrl;
   DataMoedel(
    {
     required this.userId,
@@ -26,8 +26,8 @@ class DataMoedel {
   Map<String, dynamic> toMap() {
     return {
       'userId': userId,
-      'conversionData': convasationData,
-      'convertedDate': convasationDate,
+      'convasationData': convasationData,
+      'convasationDate': convasationDate,
       'imageUrl': imageUrl,
     };
   }
