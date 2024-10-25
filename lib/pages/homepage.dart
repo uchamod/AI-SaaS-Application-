@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:ai_saas_application/constant/colors.dart';
 import 'package:ai_saas_application/constant/textstyles.dart';
+import 'package:ai_saas_application/services/firestore.dart';
 import 'package:ai_saas_application/widget/image_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +24,8 @@ class _HomepageState extends State<Homepage> {
   late TextRecognizer textRecognizer;
   String recognizeText = "";
   //File? _imageFile;
+  final FirestoreServices _firestoreServices = FirestoreServices();
+
   //pick image
   Future<void> imagePicker(ImageSource source) async {
     ImagePicker imgPicker = ImagePicker();
@@ -54,9 +59,25 @@ class _HomepageState extends State<Homepage> {
           recognizeText += "${textLine.text}\n";
         }
       }
-      print(recognizeText);
+      if (recognizeText.isNotEmpty) {
+        try {
+          await _firestoreServices.saveConvasationData(
+              convasationData: recognizeText,
+              convasationDate: DateTime.now(),
+              imageFile: File(imagePath!));
+        } catch (err) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: primaryColor,
+              content: Text(
+                "Upploading Error...",
+                style: Typhography().body,
+              ),
+            ),
+          );
+        }
+      }
     } catch (err) {
-      print(err.toString());
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: primaryColor,
@@ -96,6 +117,7 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
+//show model bottom sheet
   void _showModelBottomSheet() {
     showModalBottomSheet(
       elevation: 1,
@@ -163,7 +185,7 @@ class _HomepageState extends State<Homepage> {
             ),
             //select image and procsss button
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_isImagePicked) {
                   _textProsser();
                 } else {
