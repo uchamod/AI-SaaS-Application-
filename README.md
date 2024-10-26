@@ -125,7 +125,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 email uchamod52@your-domain.com or join our Slack channel.
-Linkdin (https://www.linkedin.com/in/chamod-udara-b3927a239/)
+Linkdin https://www.linkedin.com/in/chamod-udara-b3927a239/
 ## 🔮 Future Enhancements
 
 - [ ] Batch processing
