@@ -84,23 +84,6 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 GOOGLE_CLOUD_API_KEY=your_google_cloud_api_key
 ```
 
-## 🏗️ Project Structure
-
-```
-lib/
-├── main.dart
-├── config/
-├── models/
-├── services/
-│   ├── auth/
-│   ├── ml/
-│   ├── payment/
-│   └── storage/
-├── screens/
-├── widgets/
-└── utils/
-```
-
 ## 🔒 Security
 
 - All API keys are stored securely
@@ -139,10 +122,10 @@ flutter drive --target=test_driver/app.dart
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## 📞 Contact
 
-For support, email support@your-domain.com or join our Slack channel.
-
+email uchamod52@your-domain.com or join our Slack channel.
+Linkdin (https://www.linkedin.com/in/chamod-udara-b3927a239/)
 ## 🔮 Future Enhancements
 
 - [ ] Batch processing
