@@ -1,4 +1,6 @@
+import 'package:ai_saas_application/constant/colors.dart';
 import 'package:ai_saas_application/stripe/stripe_services.dart';
+import 'package:ai_saas_application/stripe/stripe_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
@@ -12,12 +14,12 @@ Future<void> initStripe({required String name, required String email}) async {
   //cretae pyment intent
   Map<String, dynamic>? pymentIntent =
       await createPymentIntent(customerId: userDetails["id"]);
-  if (pymentIntent == null || pymentIntent["client_secret"]) {
+  if (pymentIntent == null || pymentIntent["client_secret"] == null) {
     throw Exception("failed to create pymentIntent");
   }
 
   //create credit card
-  createCreditCard(
+ await createCreditCard(
       customerId: userDetails["id"], secretCode: pymentIntent["client_secret"]);
   //get pyment data
   Map<String, dynamic>? pymentData =
@@ -33,7 +35,19 @@ Future<void> initStripe({required String name, required String email}) async {
   if (subscription == null || subscription["id"] == null) {
     throw Exception("failed to create subscription");
   }
-  
+  //store premium user data in firestore
+  StripeStorage().storePremiumData(
+      customerId: userDetails["id"],
+      email: email,
+      userName: name,
+      subscriptionId: subscription["id"],
+      paymentStatus: "active",
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(const Duration(days: 30)),
+      planId: "price_1QECsQDy5aw4UDrv5q0tWBwl",
+      amountPaid: 2.99,
+      currency: "USD",
+      paymentMethod: "Credit Card");
 }
 
 //create stripe user
@@ -43,8 +57,8 @@ Future<Map<String, dynamic>?> createNewUser(
       apiMethod: APISERVICES.post,
       endPoint: "customers",
       body: {
-        name: name,
-        email: email,
+        "name": name,
+        "email": email,
         'description': 'Text Extractor Pro Plan',
       });
   return response;
@@ -68,11 +82,12 @@ Future<void> createCreditCard(
     {required String customerId, required String secretCode}) async {
   await Stripe.instance.initPaymentSheet(
     paymentSheetParameters: SetupPaymentSheetParameters(
-      primaryButtonLabel: 'Subscribe \$4.99 monthly',
+      primaryButtonLabel: 'Subscribe \$2.99 monthly',
       style: ThemeMode.light,
       merchantDisplayName: 'Text Extractor Pro Plan',
       customerId: customerId,
       setupIntentClientSecret: secretCode,
+    
     ),
   );
 

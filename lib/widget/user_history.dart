@@ -3,6 +3,7 @@ import 'package:ai_saas_application/constant/textstyles.dart';
 import 'package:ai_saas_application/model/data_moedel.dart';
 import 'package:ai_saas_application/services/firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
@@ -95,7 +96,16 @@ class _UserHistoryState extends State<UserHistory> {
                                 fontWeight: FontWeight.w700),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: item.convasationData));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  backgroundColor: secondaryColor,
+                                  content: Text('Text copied to clipboard!',style: Typhography().body.copyWith(color: terneryColor),),
+                                ),
+                              );
+                            },
                             child: SvgPicture.asset(
                               "assets/copy.svg",
                               colorFilter: const ColorFilter.mode(
